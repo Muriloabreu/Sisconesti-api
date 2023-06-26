@@ -27,7 +27,6 @@ public class StateModel {
 		
 	}
 	public StateModel(Long id, String nameState) {
-		super();
 		this.id = id;
 		this.nameState = nameState;
 	}
