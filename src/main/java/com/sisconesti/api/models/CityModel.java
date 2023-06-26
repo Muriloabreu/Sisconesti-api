@@ -1,9 +1,14 @@
 package com.sisconesti.api.models;
 
+import java.util.Objects;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -13,5 +18,83 @@ public class CityModel {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+	@Column(nullable = false)
+	private String nameCity;
+	@ManyToOne
+	@JoinColumn(nullable = false)
+	private StateModel state;
+	
+	/* Constructor */
+	
+	
+	public CityModel() {
+		
+	}
+
+	public CityModel(Long id, String nameCity, StateModel state) {
+	
+		this.id = id;
+		this.nameCity = nameCity;
+		this.state = state;
+	}
+	
+	
+	/* Accessor Methods */
+	
+	
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getNameCity() {
+		return nameCity;
+	}
+
+	public void setNameCity(String nameCity) {
+		this.nameCity = nameCity;
+	}
+
+	public StateModel getState() {
+		return state;
+	}
+
+	public void setState(StateModel state) {
+		this.state = state;
+	}
+
+	@Override
+	public String toString() {
+		return "CityModel [id=" + id + ", nameCity=" + nameCity + ", state=" + state + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id, nameCity, state);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		CityModel other = (CityModel) obj;
+		return Objects.equals(id, other.id) && Objects.equals(nameCity, other.nameCity)
+				&& Objects.equals(state, other.state);
+	}
+	
+	
+	
+	
+	
+	
+	
 
 }
