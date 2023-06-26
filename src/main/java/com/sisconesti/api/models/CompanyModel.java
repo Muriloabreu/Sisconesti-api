@@ -19,12 +19,10 @@ public class CompanyModel {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	@Column(nullable = false)
-	private String corporate_name;
-	
+	private String corporate_name;	
 	@Column(nullable = false)
 	private String fantasy_name;
-	@Column(nullable = false)
-	private String cnpj;
+	
 	
 	/* Constructor */
 	
@@ -32,12 +30,12 @@ public class CompanyModel {
 		
 	}
 	
-	public CompanyModel(Long id, String corporate_name, String fantasy_name, String cnpj) {
+	public CompanyModel(Long id, String corporate_name, String fantasy_name) {
 		
 		this.id = id;
 		this.corporate_name = corporate_name;
 		this.fantasy_name = fantasy_name;
-		this.cnpj = cnpj;
+		
 	}
 	
 	
@@ -68,23 +66,14 @@ public class CompanyModel {
 		this.fantasy_name = fantasy_name;
 	}
 
-	public String getCnpj() {
-		return cnpj;
-	}
-
-	public void setCnpj(String cnpj) {
-		this.cnpj = cnpj;
-	}
-	
 	@Override
 	public String toString() {
-		return "Company [id=" + id + ", corporate_name=" + corporate_name + ", fantasy_name=" + fantasy_name + ", cnpj="
-				+ cnpj + "]";
+		return "CompanyModel [id=" + id + ", corporate_name=" + corporate_name + ", fantasy_name=" + fantasy_name + "]";
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(fantasy_name, cnpj, corporate_name, id);
+		return Objects.hash(corporate_name, fantasy_name, id);
 	}
 
 	@Override
@@ -96,8 +85,11 @@ public class CompanyModel {
 		if (getClass() != obj.getClass())
 			return false;
 		CompanyModel other = (CompanyModel) obj;
-		return Objects.equals(fantasy_name, other.fantasy_name) && Objects.equals(cnpj, other.cnpj)
-				&& Objects.equals(corporate_name, other.corporate_name) && Objects.equals(id, other.id);
+		return Objects.equals(corporate_name, other.corporate_name) && Objects.equals(fantasy_name, other.fantasy_name)
+				&& Objects.equals(id, other.id);
 	}
+
+	
+	
 
 }
