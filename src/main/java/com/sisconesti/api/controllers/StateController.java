@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sisconesti.api.dtos.StateDto;
+import com.sisconesti.api.models.StateModel;
 import com.sisconesti.api.services.StateService;
 
 import jakarta.validation.Valid;
@@ -40,60 +41,58 @@ public class StateController {
 			return ResponseEntity.status(HttpStatus.CONFLICT).body("Conflict: Name State is already in use!");
 		}
 		
-		CarModel carModel = new CarModel();
-		BeanUtils.copyProperties(carDto, carModel); /*Coverte Dtos para Model*/
-		carModel.setRegistrationDate(LocalDateTime.now(ZoneId.of("UTC")));
-		return ResponseEntity.status(HttpStatus.CREATED).body(carService.save(carModel));
+		StateModel stateModel = new StateModel();
+		BeanUtils.copyProperties(stateDto, stateModel); /*Coverte Dtos para Model*/
+		stateModel.setRegistrationDate(LocalDateTime.now(ZoneId.of("UTC")));
+		return ResponseEntity.status(HttpStatus.CREATED).body(stateService.save(stateModel));
 	}
 	
 	@GetMapping
-	public ResponseEntity<List<CarModel>>getAllCars(){
-		return ResponseEntity.status(HttpStatus.OK).body(carService.findAll());
+	public ResponseEntity<List<StateModel>>getAllStates(){
+		return ResponseEntity.status(HttpStatus.OK).body(stateService.findAll());
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<Object> getOneCar(@PathVariable(value = "id") Long id) {
+	public ResponseEntity<Object> getOneState(@PathVariable(value = "id") Long id) {
 
-		Optional<CarModel> carOptional = carService.findById(id);
+		Optional<StateModel> stateOptional = stateService.findById(id);
 
-		if (!carOptional.isPresent()) {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Car not found. "); /* Mensagem se a School não for encontrado */
+		if (!stateOptional.isPresent()) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("State not found. "); /* Mensagem se a School não for encontrado */
 		}
 
-		return ResponseEntity.status(HttpStatus.OK).body(carOptional.get());
+		return ResponseEntity.status(HttpStatus.OK).body(stateOptional.get());
 
 	}
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Object> deleteCar(@PathVariable(value = "id") Long id) {
+	public ResponseEntity<Object> deleteState(@PathVariable(value = "id") Long id) {
 
-		Optional<CarModel> carOptional = carService.findById(id);
+		Optional<StateModel> stateOptional = stateService.findById(id);
 
-		if (!carOptional.isPresent()) {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Car not found. "); /* Mensagem se a School não for encontrado */
+		if (!stateOptional.isPresent()) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("State not found. "); /* Mensagem se a School não for encontrado */
 		}
 		
-		carService.delete(carOptional.get());
-		return ResponseEntity.status(HttpStatus.OK).body("Class Diary deleted successfully.");
+		stateService.delete(stateOptional.get());
+		return ResponseEntity.status(HttpStatus.OK).body("State deleted successfully.");
 
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<Object> updateCar(@PathVariable(value = "id") Long id,
-			                                        @RequestBody @Valid CarDto carDto) {
+	public ResponseEntity<Object> updateState(@PathVariable(value = "id") Long id,
+			                                        @RequestBody @Valid StateDto stateDto) {
 
-		Optional<CarModel> carOptional = carService.findById(id);
+		Optional<StateModel> stateOptional = stateService.findById(id);
 
-		if (!carOptional.isPresent()) {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Car not found. "); /* Mensagem se a School não for encontrado */
+		if (!stateOptional.isPresent()) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("State not found. "); /* Mensagem se a School não for encontrado */
 		}
 		
-		var carModel = carOptional.get();
-		carModel.setLicensePlateCar(carDto.getLicensePlateCar());
-		carModel.setBrandCar(carDto.getBrandCar());
-		carModel.setModelCar(carDto.getModelCar());
-		carModel.setColorCar(carDto.getColorCar());	
+		var stateModel = stateOptional.get();
+		stateModel.setNameState(stateDto.getNameState());
 		
-		return ResponseEntity.status(HttpStatus.OK).body(carService.save(carModel));
+		
+		return ResponseEntity.status(HttpStatus.OK).body(stateService.save(stateModel));
 
 	}
 
