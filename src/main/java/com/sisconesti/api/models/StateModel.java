@@ -1,5 +1,6 @@
 package com.sisconesti.api.models;
 
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 import jakarta.persistence.Column;
@@ -19,6 +20,8 @@ public class StateModel {
 	private Long id;
 	@Column(nullable = false)
 	private String nameState;
+	@Column(nullable = false)
+	private LocalDateTime registrationDate;
 	
 	/* Constructor */
 	
@@ -26,9 +29,10 @@ public class StateModel {
 	public StateModel() {
 		
 	}
-	public StateModel(Long id, String nameState) {
+	public StateModel(Long id, String nameState, LocalDateTime registrationDate) {
 		this.id = id;
 		this.nameState = nameState;
+		this.registrationDate = registrationDate;
 	}
 	
 	/* Accessor Methods */
