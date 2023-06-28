@@ -50,14 +50,19 @@ public class StateModel {
 	public void setNameState(String nameState) {
 		this.nameState = nameState;
 	}
-	
+	public LocalDateTime getRegistrationDate() {
+		return registrationDate;
+	}
+	public void setRegistrationDate(LocalDateTime registrationDate) {
+		this.registrationDate = registrationDate;
+	}
 	@Override
 	public String toString() {
-		return "StateModel [id=" + id + ", nameState=" + nameState + "]";
+		return "StateModel [id=" + id + ", nameState=" + nameState + ", registrationDate=" + registrationDate + "]";
 	}
 	@Override
 	public int hashCode() {
-		return Objects.hash(id, nameState);
+		return Objects.hash(id, nameState, registrationDate);
 	}
 	@Override
 	public boolean equals(Object obj) {
@@ -68,8 +73,11 @@ public class StateModel {
 		if (getClass() != obj.getClass())
 			return false;
 		StateModel other = (StateModel) obj;
-		return Objects.equals(id, other.id) && Objects.equals(nameState, other.nameState);
+		return Objects.equals(id, other.id) && Objects.equals(nameState, other.nameState)
+				&& Objects.equals(registrationDate, other.registrationDate);
 	}
+	
+	
 	
 	
 	
