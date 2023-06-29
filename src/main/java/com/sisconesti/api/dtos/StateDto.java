@@ -12,7 +12,7 @@ public class StateDto {
 	}
 
 	public StateDto(@NotBlank String nameState) {
-		super();
+		
 		this.nameState = nameState;
 	}
 
