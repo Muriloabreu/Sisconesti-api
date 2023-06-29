@@ -43,11 +43,7 @@ public class CityServiceImpl implements CityService{
 		
 	}
 
-	@Override
-	public boolean existsByCityAndState(String nameState, String nameCity) {
-		
-		return cityRepository.existsByCityAndState(nameState, nameCity);
-	}
+	
 	
 	
 
