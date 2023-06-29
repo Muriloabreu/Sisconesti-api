@@ -18,7 +18,7 @@ public class CityServiceImpl implements CityService{
 	CityRepository cityRepository;
 
 	@Override
-	public List<CityModel> findByAll() {
+	public List<CityModel> findAll() {
 		
 		return cityRepository.findAll();
 	}
@@ -41,6 +41,12 @@ public class CityServiceImpl implements CityService{
 	public void delete(CityModel city) {
 		cityRepository.delete(city);
 		
+	}
+
+	@Override
+	public boolean existsByName(String name) {
+		
+		return cityRepository.existsByName(name);
 	}
 
 	
