@@ -7,10 +7,11 @@ import com.sisconesti.api.models.CityModel;
 
 public interface CityService {
 	
-	List<CityModel> findByAll();
+	List<CityModel> findAll();
 	Optional<CityModel> findById(Long id);
 	CityModel save(CityModel city);
 	void delete(CityModel city);
+	boolean existsByName(String name);
 	
 
 }
