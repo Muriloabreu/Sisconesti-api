@@ -11,6 +11,6 @@ public interface StateService {
 	Optional<StateModel> findById(Long id);
 	StateModel save(StateModel state);
 	void delete(StateModel state);
-	boolean existsByName(String name);
+	boolean existsByName(String nameState);
 
 }
