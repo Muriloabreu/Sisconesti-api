@@ -11,6 +11,6 @@ public interface CityService {
 	Optional<CityModel> findById(Long id);
 	CityModel save(CityModel city);
 	void delete(CityModel city);
-	boolean existsByCityAndState(String nameState, String nameCity);
+	
 
 }
