@@ -36,7 +36,7 @@ public class StateController {
 	@PostMapping
 	public ResponseEntity<Object> saveState(@RequestBody @Valid StateDto stateDto){
 		
-		if (stateService.existsByName(stateDto.getNameState())) {
+		if (stateService.existsByNameState(stateDto.getNameState())) {
 
 			return ResponseEntity.status(HttpStatus.CONFLICT).body("Conflict: Name State is already in use!");
 		}

@@ -6,5 +6,5 @@ import com.sisconesti.api.models.StateModel;
 
 public interface StateRepository extends JpaRepository<StateModel, Long>{
 
-	boolean existsByName(String nameState);
+	boolean existsByNameState(String nameState);
 }
