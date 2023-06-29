@@ -44,9 +44,9 @@ public class StateServiceImpl implements StateService{
 	}
 
 	@Override
-	public boolean existsByName(String name) {
+	public boolean existsByName(String nameState) {
 		
-		return stateRepository.existsByName(name);
+		return stateRepository.existsByName(nameState);
 	}
 
 }
