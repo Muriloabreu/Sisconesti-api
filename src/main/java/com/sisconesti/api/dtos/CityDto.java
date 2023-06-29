@@ -8,7 +8,7 @@ import jakarta.validation.constraints.NotNull;
 public class CityDto {
 	
 	@NotBlank
-	private String nameCity;
+	private String name;
 	@NotNull
 	private StateModel state;
 	
@@ -18,21 +18,21 @@ public class CityDto {
 		
 	}
 
-	public CityDto(@NotBlank String nameCity, @NotNull StateModel state) {
+	public CityDto(@NotBlank String name, @NotNull StateModel state) {
 		super();
-		this.nameCity = nameCity;
+		this.name = name;
 		this.state = state;
 	}
 
 	/* Accessor Methods */
 	
 	
-	public String getNameCity() {
-		return nameCity;
+	public String getName() {
+		return name;
 	}
 
-	public void setNameCity(String nameCity) {
-		this.nameCity = nameCity;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public StateModel getState() {
