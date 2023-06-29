@@ -19,7 +19,7 @@ public class CityModel {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	@Column(nullable = false)
-	private String nameCity;
+	private String name;
 	@ManyToOne
 	@JoinColumn(nullable = false)
 	private StateModel state;
@@ -31,10 +31,10 @@ public class CityModel {
 		
 	}
 
-	public CityModel(Long id, String nameCity, StateModel state) {
+	public CityModel(Long id, String name, StateModel state) {
 	
 		this.id = id;
-		this.nameCity = nameCity;
+		this.name = name;
 		this.state = state;
 	}
 	
@@ -51,12 +51,12 @@ public class CityModel {
 		this.id = id;
 	}
 
-	public String getNameCity() {
-		return nameCity;
+	public String getName() {
+		return name;
 	}
 
-	public void setNameCity(String nameCity) {
-		this.nameCity = nameCity;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public StateModel getState() {
@@ -69,12 +69,12 @@ public class CityModel {
 
 	@Override
 	public String toString() {
-		return "CityModel [id=" + id + ", nameCity=" + nameCity + ", state=" + state + "]";
+		return "CityModel [id=" + id + ", name=" + name + ", state=" + state + "]";
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(id, nameCity, state);
+		return Objects.hash(id, name, state);
 	}
 
 	@Override
@@ -86,9 +86,10 @@ public class CityModel {
 		if (getClass() != obj.getClass())
 			return false;
 		CityModel other = (CityModel) obj;
-		return Objects.equals(id, other.id) && Objects.equals(nameCity, other.nameCity)
-				&& Objects.equals(state, other.state);
+		return Objects.equals(id, other.id) && Objects.equals(name, other.name) && Objects.equals(state, other.state);
 	}
+
+	
 	
 	
 	
