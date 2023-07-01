@@ -21,6 +21,8 @@ public class StateModel {
 	@Column(nullable = false)
 	private String nameState;
 	@Column(nullable = false)
+	private String sigla;
+	@Column(nullable = false)
 	private LocalDateTime registrationDate;
 	
 	/* Constructor */
@@ -29,15 +31,17 @@ public class StateModel {
 	public StateModel() {
 		
 	}
-	public StateModel(Long id, String nameState, LocalDateTime registrationDate) {
+	
+	public StateModel(Long id, String nameState, String sigla, LocalDateTime registrationDate) {
+		super();
 		this.id = id;
 		this.nameState = nameState;
+		this.sigla = sigla;
 		this.registrationDate = registrationDate;
 	}
 	
-	/* Accessor Methods */
-	
-	
+	/* Accessor Methods */			
+
 	public Long getId() {
 		return id;
 	}
@@ -50,20 +54,30 @@ public class StateModel {
 	public void setNameState(String nameState) {
 		this.nameState = nameState;
 	}
+	public String getSigla() {
+		return sigla;
+	}
+	public void setSigla(String sigla) {
+		this.sigla = sigla;
+	}
 	public LocalDateTime getRegistrationDate() {
 		return registrationDate;
 	}
 	public void setRegistrationDate(LocalDateTime registrationDate) {
 		this.registrationDate = registrationDate;
 	}
+
 	@Override
 	public String toString() {
-		return "StateModel [id=" + id + ", nameState=" + nameState + ", registrationDate=" + registrationDate + "]";
+		return "StateModel [id=" + id + ", nameState=" + nameState + ", sigla=" + sigla + ", registrationDate="
+				+ registrationDate + "]";
 	}
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(id, nameState, registrationDate);
+		return Objects.hash(id, nameState, registrationDate, sigla);
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -74,8 +88,10 @@ public class StateModel {
 			return false;
 		StateModel other = (StateModel) obj;
 		return Objects.equals(id, other.id) && Objects.equals(nameState, other.nameState)
-				&& Objects.equals(registrationDate, other.registrationDate);
+				&& Objects.equals(registrationDate, other.registrationDate) && Objects.equals(sigla, other.sigla);
 	}
+	
+	
 	
 	
 	
