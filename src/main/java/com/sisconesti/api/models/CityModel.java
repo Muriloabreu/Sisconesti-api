@@ -1,5 +1,6 @@
 package com.sisconesti.api.models;
 
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 import jakarta.persistence.Column;
@@ -23,6 +24,8 @@ public class CityModel {
 	@ManyToOne
 	@JoinColumn(nullable = false)
 	private StateModel state;
+	@Column(nullable = false)
+	private LocalDateTime registrationDate;
 	
 	/* Constructor */
 	
@@ -31,14 +34,17 @@ public class CityModel {
 		
 	}
 
-	public CityModel(Long id, String name, StateModel state) {
-	
+	public CityModel(Long id, String name, StateModel state, LocalDateTime registrationDate) {
+		super();
 		this.id = id;
 		this.name = name;
 		this.state = state;
+		this.registrationDate = registrationDate;
 	}
-	
-	
+
+
+
+
 	/* Accessor Methods */
 	
 	
@@ -67,14 +73,23 @@ public class CityModel {
 		this.state = state;
 	}
 
+	public LocalDateTime getRegistrationDate() {
+		return registrationDate;
+	}
+
+	public void setRegistrationDate(LocalDateTime registrationDate) {
+		this.registrationDate = registrationDate;
+	}
+
 	@Override
 	public String toString() {
-		return "CityModel [id=" + id + ", name=" + name + ", state=" + state + "]";
+		return "CityModel [id=" + id + ", name=" + name + ", state=" + state + ", registrationDate=" + registrationDate
+				+ "]";
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(id, name, state);
+		return Objects.hash(id, name, registrationDate, state);
 	}
 
 	@Override
@@ -86,8 +101,11 @@ public class CityModel {
 		if (getClass() != obj.getClass())
 			return false;
 		CityModel other = (CityModel) obj;
-		return Objects.equals(id, other.id) && Objects.equals(name, other.name) && Objects.equals(state, other.state);
+		return Objects.equals(id, other.id) && Objects.equals(name, other.name)
+				&& Objects.equals(registrationDate, other.registrationDate) && Objects.equals(state, other.state);
 	}
+	
+	
 
 	
 	
