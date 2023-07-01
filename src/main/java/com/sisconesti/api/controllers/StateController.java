@@ -90,6 +90,7 @@ public class StateController {
 		
 		var stateModel = stateOptional.get();
 		stateModel.setNameState(stateDto.getNameState());
+		stateModel.setSigla(stateDto.getSigla());
 		
 		
 		return ResponseEntity.status(HttpStatus.OK).body(stateService.save(stateModel));
