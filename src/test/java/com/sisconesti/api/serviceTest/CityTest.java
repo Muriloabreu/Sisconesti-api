@@ -26,11 +26,11 @@ public class CityTest {
 	public void saveTest() {
 		
 		StateModel sm1 = new StateModel();
-		sm1.setId(2L);
+		sm1.setId(52L);
 		
 		CityModel c1 = new CityModel();
-		c1.setName("Escada");
-		c1.setRegistrationDate(LocalDateTime.now(ZoneId.of("UTF")));
+		c1.setName("Belém");
+		c1.setRegistrationDate(LocalDateTime.now(ZoneId.of("UTC")));
 		c1.setState(sm1);
 		
 		cs.save(c1);
