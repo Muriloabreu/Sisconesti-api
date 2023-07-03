@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sisconesti.api.models.StateModel;
+import com.sisconesti.api.projections.StateJoinMinProjection;
 import com.sisconesti.api.repositories.StateRepository;
 
 import jakarta.transaction.Transactional;
@@ -48,5 +49,15 @@ public class StateServiceImpl implements StateService{
 		
 		return stateRepository.existsByNameState(nameState);
 	}
+
+	@Override
+	public List<StateJoinMinProjection> seacheByName(String name) {
+		
+		return stateRepository.seacheByName(name);
+	}
+
+	
+
+	
 
 }
