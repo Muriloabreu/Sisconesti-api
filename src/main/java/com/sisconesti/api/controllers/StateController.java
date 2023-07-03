@@ -17,10 +17,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+
 
 import com.sisconesti.api.dtos.StateDto;
 import com.sisconesti.api.models.StateModel;
+import com.sisconesti.api.projections.StateJoinMinProjection;
 import com.sisconesti.api.services.StateService;
 
 import jakarta.validation.Valid;
@@ -64,6 +68,17 @@ public class StateController {
 		return ResponseEntity.status(HttpStatus.OK).body(stateOptional.get());
 
 	}
+	@GetMapping("/search/")
+	@ResponseBody
+	public ResponseEntity<List<StateJoinMinProjection>> findByName(@RequestParam(name = "name") String name) {
+		
+		List<StateJoinMinProjection> stateList = stateService.seacheByName(name);
+		
+		return new ResponseEntity<List<StateJoinMinProjection>>(stateList, HttpStatus.OK);
+
+	}
+	
+	
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Object> deleteState(@PathVariable(value = "id") Long id) {
 
