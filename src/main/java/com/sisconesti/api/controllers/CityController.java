@@ -3,6 +3,7 @@ package com.sisconesti.api.controllers;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,15 +11,20 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sisconesti.api.dtos.CityDto;
 import com.sisconesti.api.dtos.StateDto;
 import com.sisconesti.api.models.CityModel;
 import com.sisconesti.api.models.StateModel;
+import com.sisconesti.api.projections.CityJoinMinProjection;
+import com.sisconesti.api.projections.StateJoinMinProjection;
 import com.sisconesti.api.services.CityService;
 
 import jakarta.validation.Valid;
@@ -49,7 +55,27 @@ public class CityController {
 	public ResponseEntity<List<CityModel>>getAllCitys(){
 		return ResponseEntity.status(HttpStatus.OK).body(cityService.findAll());
 	}
-	
+	@GetMapping("/{id}")
+	public ResponseEntity<Object> getOneCitu(@PathVariable(value = "id") Long id) {
+
+		Optional<CityModel> cityOptional = cityService.findById(id);
+
+		if (!cityOptional.isPresent()) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("City not found. "); /* Mensagem se a School não for encontrado */
+		}
+
+		return ResponseEntity.status(HttpStatus.OK).body(cityOptional.get());
+
+	}
+	@GetMapping("/search/")
+	@ResponseBody
+	public ResponseEntity<List<CityJoinMinProjection>> findByName(@RequestParam(name = "name") String name) {
+		
+		List<CityJoinMinProjection> stateList = cityService.seacheByName(name);
+		
+		return new ResponseEntity<List<CityJoinMinProjection>>(stateList, HttpStatus.OK);
+
+	}
 	
 	
 	
