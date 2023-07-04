@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sisconesti.api.models.CityModel;
+import com.sisconesti.api.projections.CityJoinMinProjection;
 import com.sisconesti.api.repositories.CityRepository;
 
 import jakarta.transaction.Transactional;
@@ -47,6 +48,12 @@ public class CityServiceImpl implements CityService{
 	public boolean existsByName(String name) {
 		
 		return cityRepository.existsByName(name);
+	}
+
+	@Override
+	public List<CityJoinMinProjection> seacheByName(String name) {
+		
+		return cityRepository.seacheByName(name);
 	}
 
 	
