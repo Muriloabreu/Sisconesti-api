@@ -5,7 +5,7 @@ import jakarta.validation.constraints.NotBlank;
 public class StateDto {
 	
 	@NotBlank
-	private String nameState;
+	private String name;
 	@NotBlank
 	private String sigla;
 
@@ -13,18 +13,16 @@ public class StateDto {
 		
 	}
 
-	public StateDto(@NotBlank String nameState, String sigla) {
+	public StateDto(@NotBlank String name, String sigla) {
 		
-		this.nameState = nameState;
+		this.name = name;
 		this.sigla = sigla;
 	}
-
-	public String getNameState() {
-		return nameState;
+	public String getName() {
+		return name;
 	}
-
-	public void setNameState(String nameState) {
-		this.nameState = nameState;
+	public void setName(String name) {
+		this.name = name;
 	}
 	public String getSigla() {
 		return sigla;

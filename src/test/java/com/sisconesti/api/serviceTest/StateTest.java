@@ -30,7 +30,7 @@ public class StateTest {
 	
 	StateModel sm1 = new StateModel();
 	
-	sm1.setNameState("Bahia");
+	sm1.setName("Bahia");
 	sm1.setSigla("BA");
 	sm1.setRegistrationDate(LocalDateTime.now(ZoneId.of("UTC")));
 	

@@ -40,10 +40,10 @@ public class StateController {
 	@PostMapping
 	public ResponseEntity<Object> saveState(@RequestBody @Valid StateDto stateDto){
 		
-		if (stateService.existsByNameState(stateDto.getNameState())) {
-
-			return ResponseEntity.status(HttpStatus.CONFLICT).body("Conflict: Name State is already in use!");
-		}
+//		if (stateService.existsByNameState(stateDto.getName())) {
+//
+//			return ResponseEntity.status(HttpStatus.CONFLICT).body("Conflict: Name State is already in use!");
+//		}
 		
 		StateModel stateModel = new StateModel();
 		BeanUtils.copyProperties(stateDto, stateModel); /*Coverte Dtos para Model*/
@@ -104,7 +104,7 @@ public class StateController {
 		}
 		
 		var stateModel = stateOptional.get();
-		stateModel.setNameState(stateDto.getNameState());
+		stateModel.setName(stateDto.getName());
 		stateModel.setSigla(stateDto.getSigla());
 		
 		

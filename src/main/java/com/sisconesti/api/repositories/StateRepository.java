@@ -10,8 +10,8 @@ import com.sisconesti.api.projections.StateJoinMinProjection;
 
 public interface StateRepository extends JpaRepository<StateModel, Long>{
 
-	boolean existsByNameState(String nameState);
 	
-	@Query(value = "select s from StateModel s where s.name like %?1%" )
+	
+	@Query(value = "select s.name, s.sigla from StateModel s where s.name like %?1%" )
 	public List<StateJoinMinProjection> seacheByName(String name);
 }

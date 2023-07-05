@@ -44,11 +44,11 @@ public class StateServiceImpl implements StateService{
 		stateRepository.delete(state);
 	}
 
-	@Override
-	public boolean existsByNameState(String nameState) {
-		
-		return stateRepository.existsByNameState(nameState);
-	}
+//	@Override
+//	public boolean existsByNameState(String name) {
+//		
+//		return stateRepository.existsByNameState(name);
+//	}
 
 	@Override
 	public List<StateJoinMinProjection> seacheByName(String name) {

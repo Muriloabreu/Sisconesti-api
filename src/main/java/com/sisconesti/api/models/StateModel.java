@@ -19,7 +19,7 @@ public class StateModel {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	@Column(nullable = false)
-	private String nameState;
+	private String name;
 	@Column(nullable = false)
 	private String sigla;
 	@Column(nullable = false)
@@ -32,10 +32,10 @@ public class StateModel {
 		
 	}
 	
-	public StateModel(Long id, String nameState, String sigla, LocalDateTime registrationDate) {
-		super();
+	public StateModel(Long id, String name, String sigla, LocalDateTime registrationDate) {
+		
 		this.id = id;
-		this.nameState = nameState;
+		this.name = name;
 		this.sigla = sigla;
 		this.registrationDate = registrationDate;
 	}
@@ -48,11 +48,11 @@ public class StateModel {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public String getNameState() {
-		return nameState;
+	public String getName() {
+		return name;
 	}
-	public void setNameState(String nameState) {
-		this.nameState = nameState;
+	public void setName(String name) {
+		this.name = name;
 	}
 	public String getSigla() {
 		return sigla;
@@ -69,13 +69,13 @@ public class StateModel {
 
 	@Override
 	public String toString() {
-		return "StateModel [id=" + id + ", nameState=" + nameState + ", sigla=" + sigla + ", registrationDate="
+		return "StateModel [id=" + id + ", nameState=" + name + ", sigla=" + sigla + ", registrationDate="
 				+ registrationDate + "]";
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(id, nameState, registrationDate, sigla);
+		return Objects.hash(id, name, registrationDate, sigla);
 	}
 
 	@Override
@@ -87,7 +87,7 @@ public class StateModel {
 		if (getClass() != obj.getClass())
 			return false;
 		StateModel other = (StateModel) obj;
-		return Objects.equals(id, other.id) && Objects.equals(nameState, other.nameState)
+		return Objects.equals(id, other.id) && Objects.equals(name, other.name)
 				&& Objects.equals(registrationDate, other.registrationDate) && Objects.equals(sigla, other.sigla);
 	}
 	
