@@ -50,11 +50,11 @@ public class CityServiceImpl implements CityService{
 		return cityRepository.existsByName(name);
 	}
 
-	@Override
-	public List<CityJoinMinProjection> seacheByName(String name) {
-		
-		return cityRepository.seacheByName(name);
-	}
+//	@Override
+//	public List<CityJoinMinProjection> seacheByName(String name) {
+//		
+//		return cityRepository.seacheByName(name);
+//	}
 
 	
 
