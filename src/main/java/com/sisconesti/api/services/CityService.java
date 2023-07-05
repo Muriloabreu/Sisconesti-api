@@ -10,7 +10,7 @@ import com.sisconesti.api.projections.StateJoinMinProjection;
 public interface CityService {
 	
 	List<CityModel> findAll();
-	List<CityJoinMinProjection> seacheByName(String name);
+//	List<CityJoinMinProjection> seacheByName(String name);
 	Optional<CityModel> findById(Long id);
 	CityModel save(CityModel city);
 	void delete(CityModel city);
