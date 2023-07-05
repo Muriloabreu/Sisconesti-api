@@ -13,7 +13,7 @@ public interface CityRepository extends JpaRepository<CityModel, Long>{
 	
 	boolean existsByName(String name);
 	
-	@Query(value = "select c from CityModel c where c.name, c.state like %?1% ")
-	public List<CityJoinMinProjection> seacheByName(String name);
+//	@Query(value = "select c from CityModel c where c.name, c.state like %?1% ")
+//	public List<CityJoinMinProjection> seacheByName(String name);
 
 }	
