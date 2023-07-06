@@ -10,9 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -42,7 +44,7 @@ public class CityController {
 		
 		if (cityService.existsByName(cityDto.getName())) {
 
-			return ResponseEntity.status(HttpStatus.CONFLICT).body("Conflict: Name State is already in use!");
+			return ResponseEntity.status(HttpStatus.CONFLICT).body("Conflict: Name city is already in use!");
 		}
 		
 		CityModel cityModel = new CityModel();
@@ -71,12 +73,44 @@ public class CityController {
 	@ResponseBody
 	public ResponseEntity<List<CityJoinMinProjection>> findByName(@RequestParam(name = "name") String name) {
 		
-		List<CityJoinMinProjection> stateList = cityService.seacheByName(name);
+		List<CityJoinMinProjection> cityList = cityService.seacheByName(name);
 		
-		return new ResponseEntity<List<CityJoinMinProjection>>(stateList, HttpStatus.OK);
+		return new ResponseEntity<List<CityJoinMinProjection>>(cityList, HttpStatus.OK);
+
+	}
+		
+	@DeleteMapping("/{id}")
+	public ResponseEntity<Object> deleteCity(@PathVariable(value = "id") Long id) {
+
+		Optional<CityModel> cityOptional = cityService.findById(id);
+
+		if (!cityOptional.isPresent()) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("City not found. "); /* Mensagem se a School não for encontrado */
+		}
+		
+		cityService.delete(cityOptional.get());
+		return ResponseEntity.status(HttpStatus.OK).body("City deleted successfully.");
 
 	}
 	
+	@PutMapping("/{id}")
+	public ResponseEntity<Object> updateState(@PathVariable(value = "id") Long id,
+			                                        @RequestBody @Valid CityDto cityDto) {
+
+		Optional<CityModel> cityOptional = cityService.findById(id);
+
+		if (!cityOptional.isPresent()) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("City not found. "); /* Mensagem se a School não for encontrado */
+		}
+		
+		var cityModel = cityOptional.get();
+		cityModel.setName(cityDto.getName());
+		cityModel.setState(cityDto.getState());
+		
+		
+		return ResponseEntity.status(HttpStatus.OK).body(cityService.save(cityModel));
+
+	}
 	
 	
 
