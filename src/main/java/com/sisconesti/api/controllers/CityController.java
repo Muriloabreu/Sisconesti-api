@@ -67,15 +67,15 @@ public class CityController {
 		return ResponseEntity.status(HttpStatus.OK).body(cityOptional.get());
 
 	}
-//	@GetMapping("/search/")
-//	@ResponseBody
-//	public ResponseEntity<List<CityJoinMinProjection>> findByName(@RequestParam(name = "name") String name) {
-//		
-//		List<CityJoinMinProjection> stateList = cityService.seacheByName(name);
-//		
-//		return new ResponseEntity<List<CityJoinMinProjection>>(stateList, HttpStatus.OK);
-//
-//	}
+	@GetMapping("/search/")
+	@ResponseBody
+	public ResponseEntity<List<CityJoinMinProjection>> findByName(@RequestParam(name = "name") String name) {
+		
+		List<CityJoinMinProjection> stateList = cityService.seacheByName(name);
+		
+		return new ResponseEntity<List<CityJoinMinProjection>>(stateList, HttpStatus.OK);
+
+	}
 	
 	
 	
