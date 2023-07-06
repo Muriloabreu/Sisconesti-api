@@ -13,9 +13,10 @@ public interface CityRepository extends JpaRepository<CityModel, Long>{
 	
 	boolean existsByName(String name);
 	
-	@Query(nativeQuery = true, value = "SELECT ct.name AS nameCity, ct.registration_date, st.name AS nameState, st.sigla AS siglaState FROM tb_citys ct "
+	@Query(nativeQuery = true, value = "SELECT ct.name AS nameCity, ct.registration_date AS date, st.name AS nameState, st.sigla AS siglaState "
+			+ "FROM tb_citys ct "
 			+ "INNER JOIN tb_states st ON st.id = ct.state_id "
-			+ "WHERE UPPER(ct.name) LIKE '%' || UPPER('?1') || '%'")
+			+ "WHERE UPPER(ct.name) LIKE '%' || UPPER(?1) || '%'")
 	public List<CityJoinMinProjection> seacheByName(String name);
 
 }	
