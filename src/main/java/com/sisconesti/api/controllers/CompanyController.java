@@ -34,11 +34,11 @@ public class CompanyController {
 	public ResponseEntity<Object> saveCompany(@RequestBody @Valid CompanyDtos companyDtos){
 		
 		
-		if(companyService.existsByCorporateName(companyDtos.getCorporate_name())) {
+		if(companyService.existsByCorporateName(companyDtos.getCorporateName())) {
 			
 			return ResponseEntity.status(HttpStatus.CONFLICT).body("Conflict: Corporate Name is already in use!"); 
 		}
-		if (companyService.existsByFantasyName(companyDtos.getfantasy_name())) {
+		if (companyService.existsByFantasyName(companyDtos.getFantasyName())) {
 
 			return ResponseEntity.status(HttpStatus.CONFLICT).body("Conflict: Fantasy Name is already in use!");
 		}
@@ -94,8 +94,8 @@ public class CompanyController {
 		}
 		
 		var companyModel = companyOptional.get();
-		companyModel.setCorporate_name(companyDtos.getCorporate_name());
-		companyModel.setfantasy_name(companyDtos.getfantasy_name());
+		companyModel.setCorporateName(companyDtos.getCorporateName());
+		companyModel.setFantasyName(companyDtos.getFantasyName());
 		
 		
 				
