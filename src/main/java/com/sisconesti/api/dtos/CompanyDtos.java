@@ -5,9 +5,9 @@ import jakarta.validation.constraints.NotBlank;
 public class CompanyDtos {
 	
 	@NotBlank
-	private String corporate_name;
+	private String corporateName;
 	@NotBlank
-	private String fantasy_name;
+	private String fantasyName;
 	
 	/* Constructor */
 	
@@ -15,30 +15,33 @@ public class CompanyDtos {
 		
 	}
 
-	public CompanyDtos(@NotBlank String corporate_name, @NotBlank String fantasy_name) {
-		
-		this.corporate_name = corporate_name;
-		this.fantasy_name = fantasy_name;
-		
+	public CompanyDtos(@NotBlank String corporateName, @NotBlank String fantasyName) {
+		super();
+		this.corporateName = corporateName;
+		this.fantasyName = fantasyName;
 	}
-	
+
+	public String getCorporateName() {
+		return corporateName;
+	}
+
+	public void setCorporateName(String corporateName) {
+		this.corporateName = corporateName;
+	}
+
+	public String getFantasyName() {
+		return fantasyName;
+	}
+
+	public void setFantasyName(String fantasyName) {
+		this.fantasyName = fantasyName;
+	}
+
+
+
 	/* Accessor Methods */
 
-	public String getCorporate_name() {
-		return corporate_name;
-	}
-
-	public void setCorporate_name(String corporate_name) {
-		this.corporate_name = corporate_name;
-	}
-
-	public String getfantasy_name() {
-		return fantasy_name;
-	}
-
-	public void setfantasy_name(String fantasy_name) {
-		this.fantasy_name = fantasy_name;
-	}
+	
 
 	
 
