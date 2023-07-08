@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.api.financeiro.dtos.BranchDtos;
-import com.api.financeiro.models.BranchModel;
-import com.api.financeiro.services.BranchService;
+import com.sisconesti.api.dtos.BranchDtos;
+import com.sisconesti.api.models.BranchModel;
+import com.sisconesti.api.services.BranchService;
 
 import jakarta.validation.Valid;
 
@@ -95,7 +95,7 @@ public class BranchController {
 		var branchModel = branchOptional.get();
 		branchModel.setName(branchDtos.getName());
 		branchModel.setCnpj(branchDtos.getCnpj());
-		branchModel.setCompany(branchDtos.getCompany());
+		branchModel.setCity(branchDtos.getCity());
 		
 				
 		return ResponseEntity.status(HttpStatus.OK).body(branchService.save(branchModel));
