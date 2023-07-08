@@ -22,9 +22,9 @@ public class CompanyModel {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	@Column(nullable = false)
-	private String corporate_name;	
+	private String corporateName;	
 	@Column(nullable = false)
-	private String fantasy_name;
+	private String fantasyName;
 	@OneToMany
 	@JoinColumn(name = "company_id")
 	private List<BranchModel> branchs;
@@ -35,16 +35,17 @@ public class CompanyModel {
 	public CompanyModel() {
 		
 	}
-	
-	public CompanyModel(Long id, String corporate_name, String fantasy_name) {
-		
+	public CompanyModel(Long id, String corporateName, String fantasyName, List<BranchModel> branchs) {
+		super();
 		this.id = id;
-		this.corporate_name = corporate_name;
-		this.fantasy_name = fantasy_name;
-		
+		this.corporateName = corporateName;
+		this.fantasyName = fantasyName;
+		this.branchs = branchs;
 	}
-	
-	
+
+
+
+
 	/* Accessor Methods */
 
 
@@ -55,33 +56,33 @@ public class CompanyModel {
 	public void setId(Long id) {
 		this.id = id;
 	}
-
-	public String getCorporate_name() {
-		return corporate_name;
+	public String getCorporateName() {
+		return corporateName;
 	}
-
-	public void setCorporate_name(String corporate_name) {
-		this.corporate_name = corporate_name;
+	public void setCorporateName(String corporateName) {
+		this.corporateName = corporateName;
 	}
-
-	public String getfantasy_name() {
-		return fantasy_name;
+	public String getFantasyName() {
+		return fantasyName;
 	}
-
-	public void setfantasy_name(String fantasy_name) {
-		this.fantasy_name = fantasy_name;
+	public void setFantasyName(String fantasyName) {
+		this.fantasyName = fantasyName;
 	}
-
+	public List<BranchModel> getBranchs() {
+		return branchs;
+	}
+	public void setBranchs(List<BranchModel> branchs) {
+		this.branchs = branchs;
+	}
 	@Override
 	public String toString() {
-		return "CompanyModel [id=" + id + ", corporate_name=" + corporate_name + ", fantasy_name=" + fantasy_name + "]";
+		return "CompanyModel [id=" + id + ", corporateName=" + corporateName + ", fantasyName=" + fantasyName
+				+ ", branchs=" + branchs + "]";
 	}
-
 	@Override
 	public int hashCode() {
-		return Objects.hash(corporate_name, fantasy_name, id);
+		return Objects.hash(id);
 	}
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -91,9 +92,14 @@ public class CompanyModel {
 		if (getClass() != obj.getClass())
 			return false;
 		CompanyModel other = (CompanyModel) obj;
-		return Objects.equals(corporate_name, other.corporate_name) && Objects.equals(fantasy_name, other.fantasy_name)
-				&& Objects.equals(id, other.id);
+		return Objects.equals(id, other.id);
 	}
+
+	
+
+	
+
+	
 
 	
 	
