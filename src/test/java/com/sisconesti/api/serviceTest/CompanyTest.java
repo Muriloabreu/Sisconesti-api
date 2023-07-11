@@ -21,8 +21,8 @@ public class CompanyTest {
 	public void saveTest() {
 		
 		CompanyModel company1 = new CompanyModel();
-		company1.setCorporate_name("Empresa 01 LMTD");
-		company1.setfantasy_name("Farmacia de Todos");
+		company1.setCorporateName("Empresa 01 LMTD");
+		company1.setFantasyName("Farmacia de Todos");
 		
 		cs.save(company1);
 	}
