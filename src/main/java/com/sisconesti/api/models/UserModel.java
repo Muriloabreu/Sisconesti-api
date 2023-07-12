@@ -1,36 +1,61 @@
 package com.sisconesti.api.models;
 
+import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import jakarta.persistence.ConstraintMode;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.ForeignKey;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinColumns;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 
 @Entity
 @Table(name = "TB_USERS")
-public class UserModel {
+public class UserModel implements UserDetails{
 	
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
 	private String login;
 	
-	private String password;
+	private String passwordUser;
 	
 	private String name;
+	
+	@OneToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "user_role", uniqueConstraints = @UniqueConstraint(
+			columnNames = {"user_id", "role_id"}, name = "unique_role_user" ),
+	joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id", table = "tb_user", 
+	foreignKey = @ForeignKey(name = "user_fk", value = ConstraintMode.CONSTRAINT)),
+	
+			inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id", table = "tb_role",
+			foreignKey = @ForeignKey(name = "role_fk", value = ConstraintMode.CONSTRAINT)) )
+	private List<Role> roles; /* PAPEIS, ACESSOS*/
 
 	
 	public UserModel() {		
 	}
 		
-	public UserModel(Long id, String login, String password, String name) {
+	public UserModel(Long id, String login, String passwordUser, String name) {
 		
 		this.id = id;
 		this.login = login;
-		this.password = password;
+		this.passwordUser = passwordUser;
 		this.name = name;
 	}
 
@@ -51,12 +76,12 @@ public class UserModel {
 		this.login = login;
 	}
 
-	public String getPassword() {
-		return password;
+	public String getPasswordUser() {
+		return passwordUser;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setPasswordUser(String passwordUser) {
+		this.passwordUser = passwordUser;
 	}
 
 	public String getName() {
@@ -67,26 +92,39 @@ public class UserModel {
 		this.name = name;
 	}
 
+	/* São acessos de User ROLE_ADM, ROLE_GERENTE  */
 	@Override
-	public String toString() {
-		return "UserModel [id=" + id + ", login=" + login + ", password=" + password + ", name=" + name + "]";
+	public Collection<? extends GrantedAuthority> getAuthorities() { 
+		
+		return null;
+	}
+	@Override
+	public String getPassword() {
+		return this.passwordUser;
+	}
+	@Override
+	public String getUsername() {
+		return this.login;
 	}
 
 	@Override
-	public int hashCode() {
-		return Objects.hash(id);
+	public boolean isAccountNonExpired() {
+		return true;
 	}
 
 	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		UserModel other = (UserModel) obj;
-		return Objects.equals(id, other.id);
+	public boolean isAccountNonLocked() {
+		return true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return true;
 	}
 	
 	
