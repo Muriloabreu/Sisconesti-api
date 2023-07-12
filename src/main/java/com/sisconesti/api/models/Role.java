@@ -35,7 +35,7 @@ public class Role implements GrantedAuthority{
 	}
 
 	@Override
-	public String getAuthority() {
+	public String getAuthority() { 
 		return this.nameRole;
 	}
 	
