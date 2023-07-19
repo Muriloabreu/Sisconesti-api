@@ -2,6 +2,7 @@ package com.sisconesti.api.security;
 
 import java.sql.Date;
 
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
@@ -51,28 +52,30 @@ public class JWTTokenAuthenticationService {
 	
 	/*RETORNA USER VALIDADO COM TOKEN OU CASO NÃO SEJA VALIDO RETORNA NULL*/
 	public Authentication getAuthentication(HttpServletRequest request) {
-		
-		/*PEGA O TOKEN ENVIADO NO CABEÇALHP Http*/
+
+		/* PEGA O TOKEN ENVIADO NO CABEÇALHP Http */
 		String token = request.getHeader(HEARD_STRING);
-		if(token != null) {
-			/*FAZ A VALIDAÇÃO DO TOKEN DO USUÁRIO*/
-			String user = Jwts.parser().setSigningKey(SECRET) /*Bearer + TOKEN*/
-						 .parseClaimsJws(token.replace(TOKEN_PREFIX, "")) /* TOKEN*/
-						 .getBody().getSubject(); /*USER*/
-			
-			if(user != null) {
-				
-				UserModel userModel = ApplicationContextLoad.getApplicationContext()
-							.getBean(UserRepository.class).findUserByLogin(user);
-				
-				/*RETORNAR USER LOGADO*/
-				
-			}else {
-				return null; /*NÃO AUTORIZADO */
+		if (token != null) {
+			/* FAZ A VALIDAÇÃO DO TOKEN DO USUÁRIO */
+			String user = Jwts.parser().setSigningKey(SECRET) /* Bearer + TOKEN */
+					.parseClaimsJws(token.replace(TOKEN_PREFIX, "")) /* TOKEN */
+					.getBody().getSubject(); /* USER */
+
+			if (user != null) {
+
+				UserModel userModel = ApplicationContextLoad.getApplicationContext().getBean(UserRepository.class)
+						.findUserByLogin(user);
+
+				/* RETORNAR USER LOGADO */
+				if (userModel != null) {
+
+					return new UsernamePasswordAuthenticationToken(userModel.getLogin(), userModel.getPasswordUser(),
+							userModel.getAuthorities());
+				}
+
 			}
-		}else {
-			return null; /*NÃO AUTORIZADO */
 		}
+		return null; /* NÃO AUTORIZADO */
 	}
 	
 	
