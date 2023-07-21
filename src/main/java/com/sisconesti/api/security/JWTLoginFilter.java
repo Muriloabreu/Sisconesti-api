@@ -22,14 +22,15 @@ import jakarta.servlet.http.HttpServletResponse;
 /*ESTABELECE NOSSO GERENCIADOR DE TOKEN*/
 public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter{
 	
-	/*CONFIGURANDO O GERENCIADOR DE AUTENCICAÇÃO*/
+	/*Configurando o gerenciador de autenticacao*/
 	protected JWTLoginFilter(String url, AuthenticationManager authenticationManager) {
-		
-		/*OBRIGA A AUTENTICAR A URL*/
+       
+		/*Obriga a autenticar a URL*/
 		super(new AntPathRequestMatcher(url));
+       
+       /*Gerenciador de autenticacao*/
+       setAuthenticationManager(authenticationManager);
 		
-		/*GERENCIADOR DE AUTENTICAÇÃO*/
-		setAuthenticationManager(authenticationManager);
 	}
 	
 	/*RETORNA O USER AO PROCESSAR A AUTENTICAÇÃO*/
