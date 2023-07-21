@@ -1,5 +1,6 @@
 package com.sisconesti.api.security;
 
+import java.io.IOException;
 import java.sql.Date;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -31,7 +32,7 @@ public class JWTTokenAuthenticationService {
 	private static final String HEARD_STRING = "Authorization";
 	
 	/*GERANDO TOKEN DE AUTENTICAÇÃO ADICIONANDO AO CABEÇALHO E RESPOSTA Http*/
-	public void addAuthentication(HttpServletResponse response, String username)throws Exception {
+	public void addAuthentication(HttpServletResponse response, String username)throws IOException {
 		
 		/*MONTAGEM DO TOKEN*/
 		String JWT = Jwts.builder() /*CHAMA O GERADOR DE TOKEN	*/
