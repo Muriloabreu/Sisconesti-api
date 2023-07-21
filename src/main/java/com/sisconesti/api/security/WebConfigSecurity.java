@@ -2,11 +2,13 @@ package com.sisconesti.api.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
@@ -35,14 +37,14 @@ public class WebConfigSecurity extends WebSecurityConfiguration {
 		.anyRequest().authenticated().and().logout().logoutSuccessUrl("/index")
 		
 		/*MAPEIA URL DE LOGOUT E INVALIDA USUARIO*/
-		.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-		;
+		.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))		
 		
 		/*FILTRA AS REQUISIÇÕES DE LOGIN PARA  AUTENTICAÇÃO*/
-		
+		.and().addFilterBefore(new JWTLoginFilter("/login", authenticationManager()), 
+				UsernamePasswordAuthenticationFilter.class)
 		
 		/*FILTRA DEMAIS REQUISIÇÕES PARA VERIFICAR A PRESENÇA DO TOKEN JWT NO HEADER HTTP */
-		
+		.addFilterBefore(new JWTAPIAutheticationFilter(), UsernamePasswordAuthenticationFilter.class);
 		
 	}
 	
