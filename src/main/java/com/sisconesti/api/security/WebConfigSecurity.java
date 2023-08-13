@@ -2,7 +2,6 @@ package com.sisconesti.api.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -40,8 +39,7 @@ public class WebConfigSecurity extends WebSecurityConfiguration {
 		.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))		
 		
 		/*FILTRA AS REQUISIÇÕES DE LOGIN PARA  AUTENTICAÇÃO*/
-		.and().addFilterBefore(new JWTLoginFilter("/login", authenticationManager()), 
-				UsernamePasswordAuthenticationFilter.class)
+		.and().addFilterBefore(new JWTLoginFilter(null, null),UsernamePasswordAuthenticationFilter.class)
 		
 		/*FILTRA DEMAIS REQUISIÇÕES PARA VERIFICAR A PRESENÇA DO TOKEN JWT NO HEADER HTTP */
 		.addFilterBefore(new JWTAPIAutheticationFilter(), UsernamePasswordAuthenticationFilter.class);
