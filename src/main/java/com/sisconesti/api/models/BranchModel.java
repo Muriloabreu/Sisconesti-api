@@ -2,6 +2,7 @@ package com.sisconesti.api.models;
 
 
 
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 import jakarta.persistence.Column;
@@ -27,22 +28,26 @@ public class BranchModel {
 	@ManyToOne
 	@JoinColumn(name = "id_city")
 	private CityModel city;
+	@Column(nullable = false)
+	private LocalDateTime registrationDate;
 	
 /* Constructor */
 	
 	public BranchModel() {
 		
 	}
+	
+	public BranchModel(Long id, String name, String cnpj, CityModel city, LocalDateTime registrationDate) {
 
-
-	public BranchModel(Long id, String name, String cnpj, CityModel city) {
-		
 		this.id = id;
 		this.name = name;
-		this.cnpj = cnpj;		
+		this.cnpj = cnpj;
 		this.city = city;
+		this.registrationDate = registrationDate;
 	}
-	
+
+
+
 	/* Accessor Methods */
 
 	public Long getId() {
@@ -77,13 +82,17 @@ public class BranchModel {
 	public void setCity(CityModel city) {
 		this.city = city;
 	}
-
-
+	public LocalDateTime getRegistrationDate() {
+		return registrationDate;
+	}
+	public void setRegistrationDate(LocalDateTime registrationDate) {
+		this.registrationDate = registrationDate;
+	}
 	@Override
 	public String toString() {
-		return "BranchModel [id=" + id + ", name=" + name + ", cnpj=" + cnpj + ", city=" + city + "]";
+		return "BranchModel [id=" + id + ", name=" + name + ", cnpj=" + cnpj + ", city=" + city + ", registrationDate="
+				+ registrationDate + "]";
 	}
-
 
 	@Override
 	public int hashCode() {

@@ -1,5 +1,7 @@
 package com.sisconesti.api.controllers;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
 import java.util.Optional;
 
@@ -44,7 +46,7 @@ public class BranchController {
 				
 		var branchModel = new BranchModel();
 		BeanUtils.copyProperties(branchDtos, branchModel);
-		
+		branchModel.setRegistrationDate(LocalDateTime.now(ZoneId.of("UTC")));
 		
 		return ResponseEntity.status(HttpStatus.OK).body(branchService.save(branchModel));		
 		
