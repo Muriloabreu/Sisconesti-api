@@ -1,5 +1,7 @@
 package com.sisconesti.api.controllers;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
 import java.util.Optional;
 
@@ -45,8 +47,7 @@ public class CompanyController {
 				
 		var companyModel = new CompanyModel();
 		BeanUtils.copyProperties(companyDtos, companyModel);
-		
-		
+		companyModel.setRegistrationDate(LocalDateTime.now(ZoneId.of("UTC")));		
 		return ResponseEntity.status(HttpStatus.OK).body(companyService.save(companyModel));		
 		
 	}
