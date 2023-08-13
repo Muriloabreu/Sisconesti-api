@@ -1,5 +1,6 @@
 package com.sisconesti.api.models;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
@@ -28,6 +29,8 @@ public class CompanyModel {
 	@OneToMany
 	@JoinColumn(name = "company_id")
 	private List<BranchModel> branchs;
+	@Column(nullable = false)
+	private LocalDateTime registrationDate;
 	
 	
 	/* Constructor */
@@ -35,13 +38,16 @@ public class CompanyModel {
 	public CompanyModel() {
 		
 	}
-	public CompanyModel(Long id, String corporateName, String fantasyName, List<BranchModel> branchs) {
+	public CompanyModel(Long id, String corporateName, String fantasyName, List<BranchModel> branchs,
+			LocalDateTime registrationDate) {
 		super();
 		this.id = id;
 		this.corporateName = corporateName;
 		this.fantasyName = fantasyName;
 		this.branchs = branchs;
+		this.registrationDate = registrationDate;
 	}
+
 
 
 
@@ -74,10 +80,16 @@ public class CompanyModel {
 	public void setBranchs(List<BranchModel> branchs) {
 		this.branchs = branchs;
 	}
+	public LocalDateTime getRegistrationDate() {
+		return registrationDate;
+	}
+	public void setRegistrationDate(LocalDateTime registrationDate) {
+		this.registrationDate = registrationDate;
+	}
 	@Override
 	public String toString() {
 		return "CompanyModel [id=" + id + ", corporateName=" + corporateName + ", fantasyName=" + fantasyName
-				+ ", branchs=" + branchs + "]";
+				+ ", branchs=" + branchs + ", registrationDate=" + registrationDate + "]";
 	}
 	@Override
 	public int hashCode() {
