@@ -25,13 +25,11 @@ public class StateTest {
 	
 	//@Test
 	@Ignore
-	public void saveStateTest() {
-		
-	
+	public void saveStateTest() {	
 	StateModel sm1 = new StateModel();
 	
 	sm1.setName("Bahia");
-	sm1.setSigla("BA");
+	sm1.setUf("BA");
 	sm1.setRegistrationDate(LocalDateTime.now(ZoneId.of("UTC")));
 	
 	ss.save(sm1);
