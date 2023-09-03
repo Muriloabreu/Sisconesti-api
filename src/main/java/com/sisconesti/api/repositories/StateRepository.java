@@ -12,6 +12,6 @@ public interface StateRepository extends JpaRepository<StateModel, Long>{
 
 	
 	
-	@Query(value = "select s.name AS name, s.sigla AS sigla from StateModel s where s.name like %?1%" )
+	@Query(value = "select s.name AS name, s.uf AS sigla from StateModel s where s.name like %?1%" )
 	public List<StateJoinMinProjection> seacheByName(String name);
 }
