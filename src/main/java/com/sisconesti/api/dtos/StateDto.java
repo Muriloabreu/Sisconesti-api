@@ -7,16 +7,13 @@ public class StateDto {
 	@NotBlank
 	private String name;
 	@NotBlank
-	private String sigla;
+	private String uf;
 
-	public StateDto() {
-		
+	public StateDto() {		
 	}
-
-	public StateDto(@NotBlank String name, String sigla) {
-		
+	public StateDto(@NotBlank String name, String uf) {		
 		this.name = name;
-		this.sigla = sigla;
+		this.uf = uf;
 	}
 	public String getName() {
 		return name;
@@ -24,11 +21,11 @@ public class StateDto {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getSigla() {
-		return sigla;
+	public String getUf() {
+		return uf;
 	}
-	public void setSigla(String sigla) {
-		this.sigla = sigla;
+	public void setUf(String uf) {
+		this.uf = uf;
 	}
 	
 }
