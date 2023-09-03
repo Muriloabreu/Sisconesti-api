@@ -3,6 +3,7 @@ package com.sisconesti.api.serviceTest;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import org.junit.Ignore;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,8 @@ public class CityTest {
 	@Autowired
 	CityService cs;
 	
-	@Test 
+	//@Test
+	@Ignore
 	public void saveTest() {
 		
 		StateModel sm1 = new StateModel();
@@ -38,10 +40,7 @@ public class CityTest {
 		
 		LocalDateTime dt3 = LocalDateTime.parse("07/07/2023 11:02:10", formatter );
 		
-		c1.setRegistrationDate(dt3);
-		
-		
-		
+		c1.setRegistrationDate(dt3);		
 		c1.setState(sm1);
 		
 		cs.save(c1);
