@@ -21,7 +21,7 @@ public class StateModel {
 	@Column(nullable = false)
 	private String name;
 	@Column(nullable = false)
-	private String sigla;
+	private String uf;
 	@Column(nullable = false)
 	private LocalDateTime registrationDate;
 	
@@ -32,11 +32,11 @@ public class StateModel {
 		
 	}
 	
-	public StateModel(Long id, String name, String sigla, LocalDateTime registrationDate) {
+	public StateModel(Long id, String name, String uf, LocalDateTime registrationDate) {
 		
 		this.id = id;
 		this.name = name;
-		this.sigla = sigla;
+		this.uf = uf;
 		this.registrationDate = registrationDate;
 	}
 	
@@ -54,12 +54,14 @@ public class StateModel {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getSigla() {
-		return sigla;
+	public String getUf() {
+		return uf;
 	}
-	public void setSigla(String sigla) {
-		this.sigla = sigla;
+
+	public void setUf(String uf) {
+		this.uf = uf;
 	}
+
 	public LocalDateTime getRegistrationDate() {
 		return registrationDate;
 	}
@@ -69,13 +71,13 @@ public class StateModel {
 
 	@Override
 	public String toString() {
-		return "StateModel [id=" + id + ", nameState=" + name + ", sigla=" + sigla + ", registrationDate="
+		return "StateModel [id=" + id + ", nameState=" + name + ", uf=" + uf + ", registrationDate="
 				+ registrationDate + "]";
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(id, name, registrationDate, sigla);
+		return Objects.hash(id);
 	}
 
 	@Override
@@ -87,9 +89,9 @@ public class StateModel {
 		if (getClass() != obj.getClass())
 			return false;
 		StateModel other = (StateModel) obj;
-		return Objects.equals(id, other.id) && Objects.equals(name, other.name)
-				&& Objects.equals(registrationDate, other.registrationDate) && Objects.equals(sigla, other.sigla);
+		return Objects.equals(id, other.id);
 	}
+
 	
 	
 	
