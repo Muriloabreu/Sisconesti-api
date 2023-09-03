@@ -1,5 +1,6 @@
 package com.sisconesti.api.serviceTest;
 
+import org.junit.Ignore;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -17,7 +18,7 @@ public class CompanyTest {
 	@Autowired
 	CompanyService cs;
 	
-	
+	@Ignore
 	public void saveTest() {
 		
 		CompanyModel company1 = new CompanyModel();
