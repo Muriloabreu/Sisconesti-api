@@ -13,7 +13,7 @@ public interface CompanyRepository extends JpaRepository<CompanyModel, Long> {
 	
 	boolean existsByCorporateName(String name);
 	boolean existsByFantasyName(String name);
-	@Query(value = "SELECT c.corporateName, c.fantasyName from CompanyModel c WHERE c.fantasyName LIKE %?1%")
-	List<CompanyModel>seacheByName(String name);
+	@Query(nativeQuery = true, value = "SELECT corporate_name, fantasy_name FROM tb_company WHERE fantasy_name LIKE %?1%")
+	List<CompanyModel>seacheByNameCompany(String name);
 
 }
