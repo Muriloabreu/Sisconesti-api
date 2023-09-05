@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -26,6 +26,7 @@ public class CompanyModel {
 	private String corporateName;	
 	@Column(nullable = false)
 	private String fantasyName;
+	@JsonIgnore
 	@OneToMany
 	@JoinColumn(name = "company_id")
 	private List<BranchModel> branchs;
@@ -40,17 +41,12 @@ public class CompanyModel {
 	}
 	public CompanyModel(Long id, String corporateName, String fantasyName, List<BranchModel> branchs,
 			LocalDateTime registrationDate) {
-		super();
 		this.id = id;
 		this.corporateName = corporateName;
 		this.fantasyName = fantasyName;
 		this.branchs = branchs;
 		this.registrationDate = registrationDate;
 	}
-
-
-
-
 
 	/* Accessor Methods */
 
