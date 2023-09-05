@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sisconesti.api.models.CompanyModel;
+import com.sisconesti.api.projections.CompanyJoinMinProjection;
 import com.sisconesti.api.repositories.CompanyRepository;
 
 import jakarta.transaction.Transactional;
@@ -55,6 +56,12 @@ public class CompanyServiceImpl implements CompanyService {
 	public boolean existsByFantasyName(String name) {
 		
 		return companyRepository.existsByFantasyName(name);
+	}
+
+	@Override
+	public List<CompanyJoinMinProjection> seacheByName(String name) {
+		
+		return companyRepository.seacheByNameCompany(name);
 	}
 	
 	
