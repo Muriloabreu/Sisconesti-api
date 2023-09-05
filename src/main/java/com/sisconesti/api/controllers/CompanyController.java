@@ -16,10 +16,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sisconesti.api.dtos.CompanyDtos;
 import com.sisconesti.api.models.CompanyModel;
+import com.sisconesti.api.projections.CompanyJoinMinProjection;
 import com.sisconesti.api.services.CompanyService;
 
 import jakarta.validation.Valid;
@@ -68,6 +71,15 @@ public class CompanyController {
 		}
 		
 		return ResponseEntity.status(HttpStatus.OK).body(companyService.findById(id));
+	}
+	@GetMapping("/search/")
+	@ResponseBody
+	public ResponseEntity<List<CompanyJoinMinProjection>> findByName(@RequestParam(name = "name") String name) {
+		
+		List<CompanyJoinMinProjection> companyList = companyService.seacheByName(name);
+		
+		return new ResponseEntity<List<CompanyJoinMinProjection>>(companyList, HttpStatus.OK);
+
 	}
 	
 	@DeleteMapping("/{id}")
