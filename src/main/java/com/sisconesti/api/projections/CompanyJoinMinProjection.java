@@ -2,7 +2,7 @@ package com.sisconesti.api.projections;
 
 public interface CompanyJoinMinProjection {
 	
-	String getCorporateName();
-	String getFantasyName();
+	String getCorporate_name();
+	String getFantasy_name();
 
 }
