@@ -25,7 +25,7 @@ import com.sisconesti.api.services.BranchService;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("financeiro/branch")
+@RequestMapping("sisconesti/branchs")
 public class BranchController {
 
 	@Autowired
