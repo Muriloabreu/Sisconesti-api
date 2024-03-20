@@ -40,7 +40,7 @@ public class CityTest {
 		
 		LocalDateTime dt3 = LocalDateTime.parse("07/07/2023 11:02:10", formatter );
 		
-		c1.setRegistrationDate(dt3);		
+				
 		c1.setState(sm1);
 		
 		cs.save(c1);

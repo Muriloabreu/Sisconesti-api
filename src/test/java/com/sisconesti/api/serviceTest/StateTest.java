@@ -1,7 +1,6 @@
 package com.sisconesti.api.serviceTest;
 
-import java.time.LocalDateTime;
-import java.time.ZoneId;
+
 
 import org.junit.Ignore;
 import org.junit.jupiter.api.Test;
@@ -30,7 +29,6 @@ public class StateTest {
 	
 	sm1.setName("Bahia");
 	sm1.setUf("BA");
-	sm1.setRegistrationDate(LocalDateTime.now(ZoneId.of("UTC")));
 	
 	ss.save(sm1);
 	
