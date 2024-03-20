@@ -49,7 +49,7 @@ public class CityController {
 		
 		CityModel cityModel = new CityModel();
 		BeanUtils.copyProperties(cityDto, cityModel); /*Coverte Dtos para Model*/
-		cityModel.setRegistrationDate(LocalDateTime.now(ZoneId.of("UTC")));
+		
 		return ResponseEntity.status(HttpStatus.CREATED).body(cityService.save(cityModel));
 	}
 	
