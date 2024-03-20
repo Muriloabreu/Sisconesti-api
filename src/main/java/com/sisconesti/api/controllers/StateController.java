@@ -1,7 +1,5 @@
 package com.sisconesti.api.controllers;
 
-import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.List;
 import java.util.Optional;
 
@@ -47,7 +45,6 @@ public class StateController {
 		
 		StateModel stateModel = new StateModel();
 		BeanUtils.copyProperties(stateDto, stateModel); /*Coverte Dtos para Model*/
-		stateModel.setRegistrationDate(LocalDateTime.now(ZoneId.of("UTC")));
 		return ResponseEntity.status(HttpStatus.CREATED).body(stateService.save(stateModel));
 	}
 	
