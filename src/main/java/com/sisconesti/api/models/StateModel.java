@@ -1,6 +1,5 @@
 package com.sisconesti.api.models;
 
-import java.time.LocalDateTime;
 import java.util.Objects;
 
 import jakarta.persistence.Column;
@@ -22,8 +21,7 @@ public class StateModel {
 	private String name;
 	@Column(nullable = false)
 	private String uf;
-	@Column(nullable = false)
-	private LocalDateTime registrationDate;
+	
 	
 	/* Constructor */
 	
@@ -32,12 +30,12 @@ public class StateModel {
 		
 	}
 	
-	public StateModel(Long id, String name, String uf, LocalDateTime registrationDate) {
+	public StateModel(Long id, String name, String uf) {
 		
 		this.id = id;
 		this.name = name;
 		this.uf = uf;
-		this.registrationDate = registrationDate;
+		
 	}
 	
 	/* Accessor Methods */			
@@ -62,17 +60,10 @@ public class StateModel {
 		this.uf = uf;
 	}
 
-	public LocalDateTime getRegistrationDate() {
-		return registrationDate;
-	}
-	public void setRegistrationDate(LocalDateTime registrationDate) {
-		this.registrationDate = registrationDate;
-	}
 
 	@Override
 	public String toString() {
-		return "StateModel [id=" + id + ", nameState=" + name + ", uf=" + uf + ", registrationDate="
-				+ registrationDate + "]";
+		return "StateModel [id=" + id + ", nameState=" + name + ", uf=" + uf + "]";
 	}
 
 	@Override
