@@ -1,6 +1,8 @@
 package com.sisconesti.api.serviceTest;
 
-
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.List;
 
 import org.junit.Ignore;
 import org.junit.jupiter.api.Test;
@@ -33,5 +35,20 @@ public class StateTest {
 	ss.save(sm1);
 	
 	}
+	
+	@Test
+	public void listar() {
+		
+		List<StateModel> states = ss.findAll();
+		
+		for (StateModel state : states) {
+			
+			System.out.println("===========================================\nid: " + state.getId() + "\nUF: " + state.getUf() + "\nName State: " + state.getName());
+		}
+		
+		
+		
+	}
+	
 	
 }
