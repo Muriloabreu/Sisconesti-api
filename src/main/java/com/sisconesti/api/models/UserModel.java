@@ -5,8 +5,13 @@ import java.util.List;
 import java.util.Objects;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.sisconesti.api.enums.RoleEnum;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.ConstraintMode;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -25,41 +30,35 @@ import jakarta.persistence.UniqueConstraint;
 @Table(name = "TB_USERS")
 public class UserModel implements UserDetails{
 	
-	private static final long serialVersionUID = 1L;
-
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_user")
 	private Long id;
-	
+	@Column(nullable = false)
+	private String nome;
+	@Column(nullable = false, unique = true)
 	private String login;
+	@Column(nullable = false)
+	private String senha;
+	@Column(nullable = false)
+	private RoleEnum role;
 	
-	private String passwordUser;
 	
-	private String name;
-	
-	@OneToMany(fetch = FetchType.EAGER)
-	@JoinTable(name = "user_role", uniqueConstraints = @UniqueConstraint(
-			columnNames = {"user_id", "role_id"}, name = "unique_role_user" ),
-	joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id", table = "tb_user", unique = false, 
-	foreignKey = @ForeignKey(name = "user_fk", value = ConstraintMode.CONSTRAINT)),
-	
-			inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id", table = "tb_role", unique = false, updatable = false,
-			foreignKey = @ForeignKey(name = "role_fk", value = ConstraintMode.CONSTRAINT)) )
-	private List<Role> roles; /* PAPEIS, ACESSOS*/
-
+	/* Constructor */
 	
 	public UserModel() {		
 	}
 		
-	public UserModel(Long id, String login, String passwordUser, String name) {
-		
+	public UserModel(Long id, String nome, String login, String senha, RoleEnum role) {
 		this.id = id;
+		this.nome = nome;
 		this.login = login;
-		this.passwordUser = passwordUser;
-		this.name = name;
+		this.senha = senha;
+		this.role = role;
 	}
 
 
+	/* Accessor Methods */
+	
 	public Long getId() {
 		return id;
 	}
@@ -76,53 +75,75 @@ public class UserModel implements UserDetails{
 		this.login = login;
 	}
 
-	public String getPasswordUser() {
-		return passwordUser;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setPasswordUser(String passwordUser) {
-		this.passwordUser = passwordUser;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
-	public String getName() {
-		return name;
+	public String getSenha() {
+		return senha;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
+
+	public RoleEnum getRole() {
+		return role;
+	}
+
+	public void setRole(RoleEnum role) {
+		this.role = role;
+	}
+	
+	
 
 	/* São acessos de User ROLE_ADM, ROLE_GERENTE  */
 	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() { 
-		
-		return null;
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		if (this.role == RoleEnum.ADMIN) {
+
+			return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"));
+		}
+
+		return List.of(new SimpleGrantedAuthority("ROLE_USER"));
 	}
+
 	@Override
+	@JsonIgnore
 	public String getPassword() {
-		return this.passwordUser;
+		return this.senha;
 	}
+
 	@Override
+	@JsonIgnore
 	public String getUsername() {
 		return this.login;
 	}
 
 	@Override
+	@JsonIgnore
 	public boolean isAccountNonExpired() {
 		return true;
 	}
 
 	@Override
+	@JsonIgnore
 	public boolean isAccountNonLocked() {
 		return true;
 	}
 
 	@Override
+	@JsonIgnore
 	public boolean isCredentialsNonExpired() {
 		return true;
 	}
 
 	@Override
+	@JsonIgnore
 	public boolean isEnabled() {
 		return true;
 	}
