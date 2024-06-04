@@ -10,6 +10,7 @@ import com.sisconesti.api.projections.BranchJoinAllProjection;
 import com.sisconesti.api.projections.BranchJoinMinProjection;
 
 
+
 public interface BranchRepository extends JpaRepository<BranchModel, Long>{
 	
 	boolean existsByName(String name);

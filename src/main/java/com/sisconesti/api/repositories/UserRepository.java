@@ -7,7 +7,7 @@ import com.sisconesti.api.models.UserModel;
 
 public interface UserRepository extends JpaRepository<UserModel, Long>{
 	
-	@Query("select u from UserModel u where u.login = ?1 ")
-	UserModel findUserByLogin(String login);
+	
+	UserModel findByLogin(String login);
 
 }
