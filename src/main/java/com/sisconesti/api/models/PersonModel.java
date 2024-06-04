@@ -9,14 +9,16 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
+import jakarta.persistence.SequenceGenerator;
 
 
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS) /* SERVE PARA NÃO CRIAR UMA TABELA NO BANCO*/
+@SequenceGenerator(name = "seq_person", sequenceName = "seq_person", allocationSize = 1, initialValue = 1	)
 public abstract class PersonModel {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_person")
 	private Long id;
 	@Column(nullable = false)
 	private String firstName;
