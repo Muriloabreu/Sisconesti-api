@@ -15,7 +15,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "TB_BRANCH")
+@Table(name = "TB_BRANCHS")
 public class BranchModel {
 	
 	@Id
@@ -25,6 +25,9 @@ public class BranchModel {
 	private String name;
 	@Column(nullable = false)
 	private String cnpj;
+	@ManyToOne
+	@JoinColumn(name = "id_company")
+	private CompanyModel company;
 	@ManyToOne
 	@JoinColumn(name = "id_city")
 	private CityModel city;
@@ -37,14 +40,19 @@ public class BranchModel {
 		
 	}
 	
-	public BranchModel(Long id, String name, String cnpj, CityModel city, LocalDateTime registrationDate) {
 
-		this.id = id;
-		this.name = name;
-		this.cnpj = cnpj;
-		this.city = city;
-		this.registrationDate = registrationDate;
-	}
+	public BranchModel(Long id, String name, String cnpj, CompanyModel company, CityModel city,
+		LocalDateTime registrationDate) {
+	super();
+	this.id = id;
+	this.name = name;
+	this.cnpj = cnpj;
+	this.company = company;
+	this.city = city;
+	this.registrationDate = registrationDate;
+}
+
+
 
 
 
@@ -88,11 +96,19 @@ public class BranchModel {
 	public void setRegistrationDate(LocalDateTime registrationDate) {
 		this.registrationDate = registrationDate;
 	}
+	public CompanyModel getCompany() {
+		return company;
+	}
+	public void setCompany(CompanyModel company) {
+		this.company = company;
+	}
+	
 	@Override
 	public String toString() {
-		return "BranchModel [id=" + id + ", name=" + name + ", cnpj=" + cnpj + ", city=" + city + ", registrationDate="
-				+ registrationDate + "]";
+		return "BranchModel [id=" + id + ", name=" + name + ", cnpj=" + cnpj + ", company=" + company + ", city=" + city
+				+ ", registrationDate=" + registrationDate + "]";
 	}
+
 
 	@Override
 	public int hashCode() {
