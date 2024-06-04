@@ -26,7 +26,6 @@ public class DepartmentModel {
 	}
 
 	public DepartmentModel(Long id, String name) {
-		super();
 		this.id = id;
 		this.name = name;
 		
