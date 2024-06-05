@@ -1,5 +1,8 @@
 package com.sisconesti.api.services;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -10,24 +13,46 @@ import org.springframework.stereotype.Service;
 import com.sisconesti.api.models.UserModel;
 import com.sisconesti.api.repositories.UserRepository;
 
+import jakarta.transaction.Transactional;
+
 @Service
-public class UserServiceImpl implements UserDetailsService{
+public class UserServiceImpl implements UserService{
 	
 	@Autowired
 	UserRepository userRepository;
 
 	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		
-		/*Consulta no Banco o user*/
-		
-		UserModel userModel = userRepository.findUserByLogin(username);
-		if(userModel == null) {
-			
-			throw new UsernameNotFoundException("User not found. ");
-		}
-		
-		return new User(userModel.getLogin(), userModel.getPassword(), userModel.getAuthorities());
-	} 
+	public List<UserModel> findAll() {
+		return userRepository.findAll();
+	}
+
+	@Override
+	public Optional<UserModel> findById(Long id) {
+		return userRepository.findById(id);
+	}
+
+	@Override
+	@Transactional
+	public UserModel salvar(UserModel userModel) {
+		return userRepository.save(userModel);
+	}
+
+	@Override
+	@Transactional
+	public void excluir(UserModel userModel) {
+		userRepository.delete(userModel);
+	}
+
+	@Override
+	public UserModel findByLogin(String login) {
+		return userRepository.findByLogin(login);
+	}
+
+	@Override
+	public UserDetails loadUserByUsername(String login) {
+		return userRepository.findByLogin(login);
+	}
+
+	
 
 }
