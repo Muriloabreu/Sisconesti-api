@@ -6,7 +6,7 @@ import com.sisconesti.api.models.EmployeeModel;
 
 public interface EmployeeRepository extends JpaRepository<EmployeeModel, Long>{
 	
-	boolean existByCpf(String cpf);
-	boolean existByMatricula(String matricula);
+	boolean existsByCpf(String cpf);
+	boolean existsByMatricula(String matricula);
 
 }
