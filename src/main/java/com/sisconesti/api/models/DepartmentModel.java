@@ -1,6 +1,8 @@
 package com.sisconesti.api.models;
 
 
+import java.util.Objects;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -20,7 +22,7 @@ public class DepartmentModel {
 	private String name;
 	
 	
-	
+	/* Constructor */
 	public DepartmentModel() {
 		
 	}
@@ -31,7 +33,7 @@ public class DepartmentModel {
 		
 	}
 
-
+	/* Accessor Methods */
 	public Long getId() {
 		return id;
 	}
@@ -51,7 +53,30 @@ public class DepartmentModel {
 		this.name = name;
 	}
 
+	@Override
+	public String toString() {
+		return "DepartmentModel [id=" + id + ", name=" + name + "]";
+	}
 
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		DepartmentModel other = (DepartmentModel) obj;
+		return Objects.equals(id, other.id);
+	}
+
+	
+	
 	
 	
 	
