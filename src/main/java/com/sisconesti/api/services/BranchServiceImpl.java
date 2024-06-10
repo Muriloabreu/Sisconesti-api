@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sisconesti.api.models.BranchModel;
+import com.sisconesti.api.projections.BranchJoinAllProjection;
+import com.sisconesti.api.projections.BranchJoinMinProjection;
 import com.sisconesti.api.repositories.BranchRepository;
 
 import jakarta.transaction.Transactional;
@@ -54,6 +56,14 @@ public class BranchServiceImpl implements BranchService{
 	public boolean existsByCnpj(String cnpj) {
 		
 		return branchRepository.existsByCnpj(cnpj);
+	}
+
+	public List<BranchJoinMinProjection> seacheByName(String name) {
+		return branchRepository.seacheByNameBranch(name);
+	}
+
+	public List<BranchJoinAllProjection> findAllById(Long id) {
+		return branchRepository.findAllById(id);
 	}
 
 }
