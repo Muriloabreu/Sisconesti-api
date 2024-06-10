@@ -46,7 +46,7 @@ public class BranchController {
 				
 		var branchModel = new BranchModel();
 		BeanUtils.copyProperties(branchDtos, branchModel);
-		branchModel.setRegistrationDate(LocalDateTime.now(ZoneId.of("UTC")));
+		branchModel.setRegistrationDate(LocalDateTime.now(ZoneId.of("America/Sao_Paulo")));
 		
 		return ResponseEntity.status(HttpStatus.OK).body(branchService.save(branchModel));		
 		
