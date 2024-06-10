@@ -16,10 +16,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sisconesti.api.dtos.BranchDtos;
 import com.sisconesti.api.models.BranchModel;
+import com.sisconesti.api.projections.BranchJoinAllProjection;
+import com.sisconesti.api.projections.BranchJoinMinProjection;
 import com.sisconesti.api.services.BranchService;
 
 import jakarta.validation.Valid;
@@ -68,6 +72,26 @@ public class BranchController {
 		}
 		
 		return ResponseEntity.status(HttpStatus.OK).body(branchService.findById(id));
+	}
+	
+	@GetMapping("/search/")
+	@ResponseBody
+	public ResponseEntity<List<BranchJoinMinProjection>> findByName(@RequestParam(name = "name") String name) {
+		
+		List<BranchJoinMinProjection> branchList = branchService.seacheByName(name);
+		
+		return new ResponseEntity<List<BranchJoinMinProjection>>(branchList, HttpStatus.OK);
+
+	}
+	
+	@GetMapping("/searchAllBranchs/{id}")
+	@ResponseBody
+	public ResponseEntity<List<BranchJoinAllProjection>> findByIdAllBranchs(@PathVariable(value = "id") Long id) {
+		
+		List<BranchJoinAllProjection> branchList = branchService.findAllById(id);
+		
+		return new ResponseEntity<List<BranchJoinAllProjection>>(branchList, HttpStatus.OK);
+
 	}
 	
 	@DeleteMapping("/{id}")
