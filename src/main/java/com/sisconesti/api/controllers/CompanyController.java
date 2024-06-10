@@ -50,7 +50,7 @@ public class CompanyController {
 				
 		var companyModel = new CompanyModel();
 		BeanUtils.copyProperties(companyDtos, companyModel);
-		companyModel.setRegistrationDate(LocalDateTime.now(ZoneId.of("UTC")));		
+		companyModel.setRegistrationDate(LocalDateTime.now(ZoneId.of("America/Sao_Paulo")));		
 		return ResponseEntity.status(HttpStatus.OK).body(companyService.save(companyModel));		
 		
 	}
