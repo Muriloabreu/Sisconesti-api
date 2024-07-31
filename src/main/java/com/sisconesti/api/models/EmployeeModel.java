@@ -1,5 +1,7 @@
 package com.sisconesti.api.models;
 
+import java.time.LocalDateTime;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
@@ -8,12 +10,13 @@ import jakarta.persistence.Table;
 @Table(name = "TB_EMPLOYEES")
 public class EmployeeModel extends PersonModel {
 
-	private static final long serialVersionUID = 1L;
+	
 	@Column(nullable = false)
 	private String cpf;
 	@Column(nullable = false, unique = true, length = 10)
 	private String matricula;
-	
+	@Column(nullable = false)
+	private LocalDateTime registrationDate;
 	
 	
 	/* Constructor */
@@ -21,11 +24,13 @@ public class EmployeeModel extends PersonModel {
 	public EmployeeModel() {
 	}
 	
-	public EmployeeModel(String cpf, String matricula) {
-		
+	public EmployeeModel(String cpf, String matricula, LocalDateTime registrationDate) {
 		this.cpf = cpf;
 		this.matricula = matricula;
+		this.registrationDate = registrationDate;
 	}
+
+
 
 
 
@@ -45,11 +50,22 @@ public class EmployeeModel extends PersonModel {
 	public void setMatricula(String matricula) {
 		this.matricula = matricula;
 	}
+	
+	
+	public LocalDateTime getRegistrationDate() {
+		return registrationDate;
+	}
+
+	public void setRegistrationDate(LocalDateTime registrationDate) {
+		this.registrationDate = registrationDate;
+	}
 
 	@Override
 	public String toString() {
-		return "EmployeeModel [cpf=" + cpf + ", matricula=" + matricula + "]";
+		return "EmployeeModel [cpf=" + cpf + ", matricula=" + matricula + ", registrationDate=" + registrationDate
+				+ "]";
 	}
+
 	
 	
 	
